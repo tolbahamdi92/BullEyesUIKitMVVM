@@ -10,25 +10,25 @@ import WebKit
 
 class AboutVC: UIViewController {
     
-    //MARK: IBOutlet
+    // MARK: IBOutlet
     @IBOutlet weak var webView: WKWebView!
     
-    //MARK: LifeCycle ViewController
+    // MARK: LifeCycle ViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         setupWebView()
     }
     
-    //MARK: IBAction
+    // MARK: IBAction
     @IBAction func closeBtnTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
 }
 
-//MARK: Private Methods
+// MARK: Private Methods
 extension AboutVC {
     private func setupWebView() {
-        if let url = Bundle.main.url(forResource: "BullsEye", withExtension: "html") {
+        if let url = Bundle.main.url(forResource: URLs.urlResource, withExtension: URLs.urlExtension) {
             let request = URLRequest(url: url)
             webView.load(request)
         }

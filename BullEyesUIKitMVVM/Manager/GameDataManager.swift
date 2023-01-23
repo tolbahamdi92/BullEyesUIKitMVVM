@@ -1,5 +1,5 @@
 //
-//  GameData.swift
+//  GameDataManager.swift
 //  BullEyesUIKitMVVM
 //
 //  Created by Tolba on 16/06/1444 AH.
@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct GameData {
+struct GameDataManager {
     private(set) static var gameObject: Game? {
         get {
-            return UserDefaults.standard.getObject(dataType: Game.self, key: "data")
+            return UserDefaults.standard.getObject(dataType: Game.self, key: UserDefaultsKeys.data)
         }
         set {
-            UserDefaults.standard.setObject(newValue, for: "data")
+            UserDefaults.standard.setObject(newValue, for: UserDefaultsKeys.data)
         }
     }
     

@@ -9,25 +9,25 @@ import UIKit
 
 class GameVC: UIViewController {
     
-    //MARK: IBOutlet
+    // MARK: IBOutlet
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var targetLabel: UILabel!
     @IBOutlet weak var roundNumberLabel: UILabel!
     @IBOutlet weak var scoreNumberLabel: UILabel!
     
-    //MARK: Properties
+    // MARK: Properties
     private lazy var vm: GameVM = {
         return GameVM()
     }()
     
-    //MARK: LifeCycle ViewController
+    // MARK: LifeCycle ViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSlider()
         initVM()
     }
     
-    //MARK: IBAction
+    // MARK: IBAction
     @IBAction func hitBtnTapped(_ sender: UIButton) {
         vm.calculateScore()
         vm.showAlert()
@@ -42,7 +42,7 @@ class GameVC: UIViewController {
     }
 }
 
-//MARK: Private Methods
+// MARK: Private Methods
 extension GameVC {
     private func initVM() {
         vm.updateTargetValue = { [weak self] () in
@@ -87,19 +87,19 @@ extension GameVC {
     }
     
     private func setupSlider() {
-        let thumbImageNormal = UIImage(named: "SliderThumb-Normal")!
+        let thumbImageNormal = UIImage(named: Images.sliderThumbNormal)!
         slider.setThumbImage(thumbImageNormal, for: .normal)
-        let thumbImageHighlighted = UIImage(named: "SliderThumb-Highlighted")!
+        let thumbImageHighlighted = UIImage(named: Images.sliderThumbHighlighted)!
         slider.setThumbImage(thumbImageHighlighted, for: .highlighted)
         let insets = UIEdgeInsets(top: 0,
                                 left: 14,
                                 bottom: 0,
                                 right: 14)
-        let trackLeftImage = UIImage(named: "SliderTrackLeft")!
+        let trackLeftImage = UIImage(named: Images.sliderTrackLeft)!
         let trackLeftResizable = trackLeftImage.resizableImage(
             withCapInsets: insets)
         slider.setMinimumTrackImage(trackLeftResizable, for: .normal)
-        let trackRightImage = UIImage(named: "SliderTrackRight")!
+        let trackRightImage = UIImage(named: Images.sliderTrackRight)!
         let trackRightResizable = trackRightImage.resizableImage(
             withCapInsets: insets)
         slider.setMaximumTrackImage(trackRightResizable, for: .normal)
@@ -107,7 +107,7 @@ extension GameVC {
     
     private func showAlert(_ title: String, _ message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default) {_ in
+        let okAction = UIAlertAction(title: Buttons.alertOk, style: .default) {_ in
             self.vm.startNewRound()}
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)

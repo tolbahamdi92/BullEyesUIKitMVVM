@@ -13,7 +13,7 @@ extension UserDefaults {
             let data = try JSONEncoder().encode(data)
             set(data, forKey: key)
         } catch  {
-            print("unable to encode data \(error)")
+            print(UserDefaultsError.encode)
         }
     }
     
@@ -25,7 +25,7 @@ extension UserDefaults {
             let data = try JSONDecoder().decode(T.self, from: userDefaultData)
             return data
         } catch  {
-            print("unable to decode data \(error)")
+            print(UserDefaultsError.decode)
             return nil
         }
     }

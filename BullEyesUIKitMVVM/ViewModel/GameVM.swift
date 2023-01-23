@@ -15,13 +15,13 @@ enum TitleAlert {
         case .title(let difference):
             switch difference {
             case 0:
-                return "Perfect!"
+                return Alerts.titlePerfect
             case 1..<5:
-                return "You almost had it!"
+                return Alerts.titleAlmost
             case 5..<10:
-                return "Pretty good!"
+                return Alerts.titlePretty
             default:
-                return "Not even close..."
+                return Alerts.titleFail
             }
         }
     }
@@ -29,7 +29,7 @@ enum TitleAlert {
 
 class GameVM {
     
-    //MARK: Properties
+    // MARK: Properties
     var updateTargetValue: (()->())?
     var updateScoreValue: (()->())?
     var updateRoundValue: (()->())?
@@ -61,10 +61,10 @@ class GameVM {
     }
 }
 
-//MARK: Methods
+// MARK: Methods
 extension GameVM {
     func getData() {
-        if let data = GameData.gameObject {
+        if let data = GameDataManager.gameObject {
             scoreValue = data.score
             roundValue = data.round
             targetValue = Int.random(in: 1...100)
@@ -100,7 +100,7 @@ extension GameVM {
     }
     
     private func setData() {
-        GameData.saveData(score: scoreValue, round: roundValue)
+        GameDataManager.saveData(score: scoreValue, round: roundValue)
     }
     
     private func calculateDifferences() -> Int {
@@ -109,7 +109,7 @@ extension GameVM {
     
     func showAlert() {
         let title = TitleAlert.title(calculateDifferences()).value
-        let message: String = "You scored \(calculatePoints()) points !"
+        let message: String = ScoreResult(score: calculatePoints()).value
         self.showAlertClosure?(title,message)
     }
     
